@@ -11,7 +11,7 @@ const OAuthCallbackSuccess: NextPage = () => {
   const router = useRouter();
 
   // 프로필 정보를 불러오는 훅 호출 (이 훅은 내부에서 API 호출을 진행합니다)
-  useFetchProfile();
+  useFetchProfile(true);
 
   useEffect(() => {
     // 예를 들어, 프로필을 불러온 후 바로 홈으로 리다이렉트 할 수 있음
