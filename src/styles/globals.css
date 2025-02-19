@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 추가 글로벌 스타일 (예: 배경색, 기본 폰트 등) */
+body {
+  @apply bg-gray-100 text-gray-900;
+}
