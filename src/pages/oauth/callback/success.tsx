@@ -1,23 +1,24 @@
 // src/pages/oauth/callback/success.tsx
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useFetchProfile } from '@/hooks/useFetchProfile';
 
 const OAuthCallbackSuccess: NextPage = () => {
-  const router = useRouter();
 
-  // 프로필 정보를 불러오는 훅 호출 (이 훅은 내부에서 API 호출을 진행합니다)
-  useFetchProfile(true);
-
+  // 쿠키에 토큰이 저장되었으므로 별도 처리는 필요없고, 팝업 창을 닫습니다.
   useEffect(() => {
-    // 예를 들어, 프로필을 불러온 후 바로 홈으로 리다이렉트 할 수 있음
-    // 혹은 사용자 상태에 따라 다른 처리를 할 수 있습니다.
-    router.push('/');
-  }, [router]);
+    // 메인 창에 메시지를 보내고 팝업 창 닫기
+    if (window.opener) {
+      window.opener.postMessage({ type: 'OAUTH_SUCCESS' }, '*');
+    }
+    window.close();
+  }, []);
+
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
